@@ -17,6 +17,7 @@ Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
 std::ostream& operator<<(std::ostream& os, const Game& gm)
 {
     os<<"Window dimensions:800x600";
+    os << "Number of asteroids: " << gm.numAsteroids << "\n";
     return os;
 }
 

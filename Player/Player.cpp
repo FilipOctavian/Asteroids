@@ -12,9 +12,29 @@ Player::Player() {
     shape.setFillColor(sf::Color::Blue);
     init();
 }
-    Player& Player::operator=(const Player& player){
+
+Player::Player(const Player& other) {
+    // Copiază atributele din alt jucător
+    this->speed = other.speed;
+    this->shape = other.shape;
+    this->position = other.position;
+    this->rotation = other.rotation;
+}
+
+Player& Player::operator=(const Player& player){
+
+    if (this != &player) {
+
+        this->position = player.position;
+        this->rotation = player.rotation;
+        this->speed = player.speed;
+
+    }
+    return *this;
 
 }
+
+
 std::ostream& operator<<(std::ostream& os, const Player& pl){
     os << "Player: Position(" << pl.position.x << ", " << pl.position.y << "), Rotation(" << pl.rotation << ")";
     return os;
@@ -26,6 +46,8 @@ void Player::init() {
     rotation = 0.0f;
     shape.setPosition(position);
 }
+
+
 
 void Player::update() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
@@ -59,3 +81,4 @@ void Player::fireBullet(std::vector<Bullet>& bullets) {
     Bullet bullet(position, rotation);
     bullets.push_back(bullet);
 }
+

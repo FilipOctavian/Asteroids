@@ -9,7 +9,11 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Player& pl);
 
     Player();
+
     Player& operator=(const Player& player);
+
+    Player(const Player& other);
+
     void init();
     void update();
     void draw(sf::RenderWindow& window);
