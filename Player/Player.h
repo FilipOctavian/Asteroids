@@ -18,6 +18,6 @@ public:
 private:
     sf::ConvexShape shape;
     sf::Vector2f position;
-    float rotation;
+    float rotation{};
     float speed;
 };

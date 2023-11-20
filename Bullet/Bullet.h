@@ -1,9 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Asteroids/Asteroid.h"
 
 class Bullet {
 public:
+    Bullet(Bullet const &bullet);
+
     friend std::ostream& operator<<(std::ostream& os, const Bullet& bt);
+    bool operator==(const Bullet& other) const;
 
     Bullet(sf::Vector2f playerPosition, float playerRotation);
     void update();
@@ -13,5 +17,6 @@ public:
 private:
     sf::RectangleShape shape;
     sf::Vector2f velocity;
+
 };
 

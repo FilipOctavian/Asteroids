@@ -22,7 +22,7 @@ std::ostream& operator<<(std::ostream& os, const Game& gm)
 
 void Game::initializeMenu() {
 
-    font.loadFromFile("Font\\ARIBLK.TTF");
+    font.loadFromFile("Font/ARIBLK.TTF");
 
     startText.setFont(font);
     startText.setString("Start Game");
@@ -87,6 +87,7 @@ void Game::update() {
     // Update asteroids
     for (auto& asteroid : asteroids) {
         asteroid.update();
+
     }
 
     // Update bullets
@@ -97,6 +98,23 @@ void Game::update() {
     // Spawn a new asteroid occasionally
     if (rand() % 100 == 0) {
         spawnAsteroid();
+    }
+
+    handleCollisions();
+
+
+}
+
+void Game::handleCollisions() {
+    // Check collisions between bullets and asteroids
+    for (auto& bullet : bullets) {
+        for (auto& asteroid : asteroids) {
+            if (bullet.getBounds().intersects(asteroid.getBounds())) {
+                //remove the bullet and asteroid
+                bullets.erase(std::remove(bullets.begin(), bullets.end(), bullet), bullets.end());
+                asteroids.erase(std::remove(asteroids.begin(), asteroids.end(), asteroid), asteroids.end());
+            }
+        }
     }
 }
 

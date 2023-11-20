@@ -4,6 +4,9 @@
 class Asteroid {
 public:
     Asteroid(float size, sf::Vector2f position);
+
+    bool operator==(const Asteroid& other) const;
+
     void update(){
 
     };

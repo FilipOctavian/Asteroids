@@ -7,7 +7,9 @@ Asteroid::Asteroid(float size, sf::Vector2f position) {
     shape.setPosition(position);
 }
 
-
+bool Asteroid::operator==(const Asteroid& other) const {
+    return shape.getPosition() == other.shape.getPosition();
+}
 
 void Asteroid::draw(sf::RenderWindow& window) {
     window.draw(shape);
@@ -16,3 +18,4 @@ void Asteroid::draw(sf::RenderWindow& window) {
 sf::FloatRect Asteroid::getBounds() const {
     return shape.getGlobalBounds();
 }
+

@@ -33,4 +33,6 @@ private:
     void update();
     void render();
     void spawnAsteroid();
+    void handleCollisions();
+
 };

@@ -18,6 +18,11 @@ std::ostream& operator<<(std::ostream& os, const Bullet& bt){
     return os;
 }
 
+bool Bullet::operator==(const Bullet& other) const {
+    // Compare relevant attributes for equality
+    return shape.getPosition() == other.shape.getPosition();
+}
+
 void Bullet::update() {
     shape.move(velocity);
 }
@@ -29,3 +34,6 @@ void Bullet::draw(sf::RenderWindow &window) {
 sf::FloatRect Bullet::getBounds() const {
     return shape.getGlobalBounds();
 }
+
+
+
