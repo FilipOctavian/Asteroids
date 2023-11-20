@@ -1,3 +1,8 @@
+# Asteroids SFML
+
+#### In acest proiect voi recrea jocul Asteroids folosind limbajul de programare C++ impreuna cu libraria SFML pentru interfata grafica.
+
+
 # OOP Template
 
 ### Tema 0
