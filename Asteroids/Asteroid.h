@@ -5,7 +5,12 @@ class Asteroid {
 public:
     Asteroid(float size, sf::Vector2f position);
 
+    ~Asteroid();
+
+    Asteroid(const Asteroid& other);
+
     bool operator==(const Asteroid& other) const;
+    friend std::ostream& operator<<(std::ostream& os, const Asteroid& ast);
 
     void update(){
 

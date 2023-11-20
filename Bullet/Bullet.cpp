@@ -14,7 +14,8 @@ Bullet::Bullet(sf::Vector2f playerPosition, float playerRotation) {
 }
 std::ostream& operator<<(std::ostream& os, const Bullet& bt){
 
-    os<<"Bullet";
+    os << "Bullet: Position(" << bt.shape.getPosition().x << ", " << bt.shape.getPosition().y << ")";
+
     return os;
 }
 

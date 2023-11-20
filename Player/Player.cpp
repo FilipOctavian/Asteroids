@@ -16,7 +16,7 @@ Player::Player() {
 
 }
 std::ostream& operator<<(std::ostream& os, const Player& pl){
-    //os << pl.mo << '/' << pl.da << '/' << pl.yr;
+    os << "Player: Position(" << pl.position.x << ", " << pl.position.y << "), Rotation(" << pl.rotation << ")";
     return os;
 }
 
