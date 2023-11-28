@@ -4,9 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "game.h"
-#include "../Player/Player.h"
-#include "../Asteroids/Asteroid.h"
-#include "../Bullet/Bullet.h"
 
 Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
     window.setFramerateLimit(60); // Set a frame rate limit for smooth rendering
