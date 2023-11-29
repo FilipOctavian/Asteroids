@@ -19,10 +19,6 @@ std::ostream& operator<<(std::ostream& os, const Bullet& bt){
     return os;
 }
 
-Bullet::Bullet(const Bullet& other) : shape(other.shape), velocity(other.velocity) {
-
-}
-
 
 bool Bullet::operator==(const Bullet& other) const {
     // Compare relevant attributes for equality

@@ -4,7 +4,6 @@
 
 class Bullet {
 public:
-    Bullet(Bullet const &bullet);
 
     friend std::ostream& operator<<(std::ostream& os, const Bullet& bt);
     bool operator==(const Bullet& other) const;
