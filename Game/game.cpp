@@ -106,17 +106,30 @@ void Game::update() {
 
 void Game::handleCollisions() {
     // Check collisions between bullets and asteroids
-    for (auto& bullet : bullets) {
-        for (auto& asteroid : asteroids) {
-            if (bullet.getBounds().intersects(asteroid.getBounds())) {
-                //remove the bullet and asteroid
-                bullets.erase(std::remove(bullets.begin(), bullets.end(), bullet), bullets.end());
-                asteroids.erase(std::remove(asteroids.begin(), asteroids.end(), asteroid), asteroids.end());
+    std::vector<size_t> bulletsToRemove;
+    std::vector<size_t> asteroidsToRemove;
+
+    for (size_t i = 0; i < bullets.size(); ++i) {
+        for (size_t j = 0; j < asteroids.size(); ++j) {
+            if (bullets[i].getBounds().intersects(asteroids[j].getBounds())) {
+                bulletsToRemove.push_back(i);
+                asteroidsToRemove.push_back(j);
             }
         }
     }
 
+    // Eliminate bullets that collided
+    for (auto it = bulletsToRemove.rbegin(); it != bulletsToRemove.rend(); ++it) {
+        bullets.erase(bullets.begin() + *it);
+    }
+
+    // Eliminate asteroids that collided
+    for (auto it = asteroidsToRemove.rbegin(); it != asteroidsToRemove.rend(); ++it) {
+        asteroids.erase(asteroids.begin() + *it);
+    }
 }
+
+
 
 void Game::render() {
     window.clear();
