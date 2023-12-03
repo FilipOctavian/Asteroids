@@ -95,13 +95,11 @@ void Game::handleMenuInput() {
 void Game::drawMenu() {
     window.clear();
 
-    // Desenează butoanele din meniu
     window.draw(startButton);
     window.draw(exitButton);
     window.draw(startText);
     window.draw(exitText);
 
-    // Afișează conținutul ferestrei
     window.display();
 }
 
