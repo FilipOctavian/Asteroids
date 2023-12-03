@@ -3,7 +3,7 @@
 
 Bullet::Bullet(sf::Vector2f playerPosition, float playerRotation) {
 
-    //shape.setRadius(3.0f);
+    shape.setSize(sf::Vector2f(6.0f, 6.0f));
     shape.setOrigin(3.0f, 3.0f);
     shape.setFillColor(sf::Color::White);
     shape.setPosition(playerPosition);

@@ -78,7 +78,14 @@ void Player::draw(sf::RenderWindow& window) {
 }
 
 void Player::fireBullet(std::vector<Bullet>& bullets) {
-    Bullet bullet(position, rotation);
+    // Calculate the position of the bullet based on player's position and rotation
+    sf::Vector2f bulletPosition(
+            position.x + 20.0f * std::sin(rotation * 3.14159265f / 180.0f),
+            position.y - 20.0f * std::cos(rotation * 3.14159265f / 180.0f)
+    );
+
+    Bullet bullet(bulletPosition, rotation);
     bullets.push_back(bullet);
 }
+
 

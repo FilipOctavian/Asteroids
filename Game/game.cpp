@@ -9,7 +9,6 @@
 Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
     window.setFramerateLimit(60); // Set a frame rate limit for smooth rendering
     isMenuActive = true;
-    initializeMenu();
 }
 
 std::ostream& operator<<(std::ostream& os, const Game& gm)
@@ -33,37 +32,8 @@ std::ostream& operator<<(std::ostream& os, const Game& gm)
     return os;
 }
 
-void Game::initializeMenu() {
 
-    font.loadFromFile("Font/ARIBLK.TTF");
 
-    startText.setFont(font);
-    startText.setString("Start Game");
-    startText.setCharacterSize(30);
-    startText.setFillColor(sf::Color::White);
-    startText.setPosition(300,200);
-
-    exitText.setFont(font);
-    exitText.setString("Exit Game");
-    exitText.setCharacterSize(30);
-    exitText.setFillColor(sf::Color::White);
-    exitText.setPosition(300, 300);
-}
-void Game::handleMenuInput() {
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        // Check if the mouse is over the "Start Game" text
-        if (startText.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
-            isMenuActive = false;
-        }
-
-        // Check if the mouse is over the "Exit Game" text
-        if (exitText.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePosition))) {
-            window.close();
-        }
-    }
-}
 
 void Game::run() {
     while (window.isOpen()) {
@@ -79,12 +49,6 @@ void Game::handleInput() {
         if (event.type == sf::Event::Closed)
             window.close();
     }
-
-    if(isMenuActive){
-
-        handleMenuInput();
-     }
-
 
 
     // Fire bullets
@@ -148,12 +112,7 @@ void Game::handleCollisions() {
 void Game::render() {
     window.clear();
 
-    if(isMenuActive){
-        window.draw(startText);
-        window.draw(exitText);
-    }
-    else
-    {
+
         // Draw player
         player.draw(window);
 
@@ -169,7 +128,7 @@ void Game::render() {
 
         // Display the contents of the window
         window.display();
-    }
+
 
 }
 

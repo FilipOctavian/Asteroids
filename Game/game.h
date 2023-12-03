@@ -27,9 +27,6 @@ private:
     std::vector<Bullet> bullets;
     bool isMenuActive;
     int numAsteroids{};
-
-    void initializeMenu();
-    void handleMenuInput();
     void handleInput();
     void update();
     void render();
