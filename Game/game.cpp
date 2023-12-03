@@ -13,6 +13,7 @@ Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
 
     inMenu = true;
 
+    font.loadFromFile("Font/ARIBLK.TTF");
 
     startButton.setSize(sf::Vector2f(200.0f, 50.0f));
     startButton.setPosition(300.0f, 250.0f);
