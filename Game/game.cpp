@@ -3,13 +3,38 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/Event.hpp>
 #include <ranges>
+#include <iostream>
 #include "game.h"
 
 Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
     window.setFramerateLimit(60); // Set a frame rate limit for smooth rendering
-    isMenuActive = true;
+
+    inMenu = true;
+
+
+    startButton.setSize(sf::Vector2f(200.0f, 50.0f));
+    startButton.setPosition(300.0f, 250.0f);
+    startButton.setFillColor(sf::Color::Green);
+
+    exitButton.setSize(sf::Vector2f(200.0f, 50.0f));
+    exitButton.setPosition(300.0f, 350.0f);
+    exitButton.setFillColor(sf::Color::Red);
+
+    startText.setFont(font);
+    startText.setString("Start Game");
+    startText.setCharacterSize(20);
+    startText.setFillColor(sf::Color::Black);
+    startText.setPosition(330.0f, 260.0f);
+
+    exitText.setFont(font);
+    exitText.setString("Exit");
+    exitText.setCharacterSize(20);
+    exitText.setFillColor(sf::Color::Black);
+    exitText.setPosition(370.0f, 360.0f);
 }
+
 
 std::ostream& operator<<(std::ostream& os, const Game& gm)
 {
@@ -33,14 +58,50 @@ std::ostream& operator<<(std::ostream& os, const Game& gm)
 }
 
 
-
-
 void Game::run() {
     while (window.isOpen()) {
-        handleInput();
-        update();
-        render();
+        if (inMenu) {
+            handleMenuInput();
+            drawMenu();
+        } else {
+            handleInput();
+            update();
+            render();
+        }
     }
+}
+
+void Game::handleMenuInput() {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            window.close();
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                if (startButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
+                    inMenu = false;
+                }
+                else if (exitButton.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
+                    window.close();
+                }
+            }
+        }
+    }
+}
+
+
+void Game::drawMenu() {
+    window.clear();
+
+    // Desenează butoanele din meniu
+    window.draw(startButton);
+    window.draw(exitButton);
+    window.draw(startText);
+    window.draw(exitText);
+
+    // Afișează conținutul ferestrei
+    window.display();
 }
 
 void Game::handleInput() {
