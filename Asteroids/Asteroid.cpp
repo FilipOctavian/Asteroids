@@ -12,9 +12,9 @@ bool Asteroid::operator==(const Asteroid& other) const {
 }
 
 
-std::ostream& operator<<(std::ostream& os, const Asteroid& ast){
+std::ostream& operator<<(std::ostream& os, const Asteroid& asteroid){
 
-    os << "Asteroid: Position(" << ast.shape.getPosition().x << ", " << ast.shape.getPosition().y << ")";
+    os << "Asteroid: Position(" << asteroid.shape.getPosition().x << ", " << asteroid.shape.getPosition().y << ")";
 
     return os;
 }

@@ -16,6 +16,20 @@ std::ostream& operator<<(std::ostream& os, const Game& gm)
 {
     os<<"Window dimensions:800x600";
     os << "Number of asteroids: " << gm.numAsteroids << "\n";
+
+    os<<"Bullets:\n";
+    for(const auto& bullet : gm.bullets)
+
+        os<<bullet<<"\n";
+
+
+    os<<"Bullets:\n";
+
+    for(const auto& bullet : gm.bullets)
+
+        os<< bullet<<"\n";
+
+
     return os;
 }
 

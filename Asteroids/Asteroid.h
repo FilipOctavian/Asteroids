@@ -9,7 +9,7 @@ public:
 
     bool operator==(const Asteroid& other) const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Asteroid& ast);
+    friend std::ostream& operator<<(std::ostream& os, const Asteroid& asteroid);
 
     void update(){
 
