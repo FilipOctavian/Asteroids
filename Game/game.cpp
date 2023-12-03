@@ -133,6 +133,8 @@ void Game::render() {
 }
 
 void Game::spawnAsteroid() {
-    Asteroid asteroid(20.0f, sf::Vector2f(window.getSize().x, rand() % window.getSize().y));
+    Asteroid asteroid(20.0f, sf::Vector2f(rand() % window.getSize().x, rand() % window.getSize().y));
     asteroids.push_back(asteroid);
 }
+
+
