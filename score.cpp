@@ -1,5 +1,5 @@
 #include "score.h"
-
+//
 void SimpleScore::increaseScore() {
     // Scorul crește cu un punct la fiecare apel
     score++;
