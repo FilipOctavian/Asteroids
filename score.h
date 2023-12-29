@@ -1,7 +1,7 @@
 //
 // Created by Octa on 29.12.2023.
 //
-//
+
 #ifndef OOP_SCORE_H
 #define OOP_SCORE_H
 
