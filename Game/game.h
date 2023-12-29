@@ -9,11 +9,11 @@
 #include "../Bullet/Bullet.h"
 #include "../Player/Player.h"
 #include "../Asteroids/Asteroid.h"
-
+#include "../score.h"
 class Game {
 public:
     friend std::ostream& operator<<(std::ostream& os, const Game& gm);
-
+    virtual ~Game();
     Game();
     void run();
 
@@ -29,6 +29,9 @@ private:
     std::vector<Asteroid> asteroids;
     std::vector<Bullet> bullets;
     int numAsteroids{};
+    Score* score;
+    sf::Font scoreFont;
+    sf::Text scoreText;
     void handleInput();
     void update();
     void render();
@@ -36,4 +39,5 @@ private:
     void handleCollisions();
     void drawMenu();
     void handleMenuInput();
+    void displayScore();
 };
