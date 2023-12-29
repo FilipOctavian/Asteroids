@@ -34,24 +34,7 @@ Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
     exitText.setCharacterSize(20);
     exitText.setFillColor(sf::Color::Black);
     exitText.setPosition(370.0f, 360.0f);
-
-    score = new SimpleScore();
-
 }
-void Game::displayScore() {
-    sf::Font scoreeFont;
-    scoreFont.loadFromFile("Font/ARIBLK.TTF");
-
-    sf::Text scoreeText;
-    scoreText.setFont(scoreFont);
-    scoreText.setString("Score: " + std::to_string(score->getScore()));  // Obține scorul sub formă de șir
-    scoreText.setCharacterSize(24);
-    scoreText.setFillColor(sf::Color::White);
-    scoreText.setPosition(10.0f, 10.0f);  // Ajustează poziția textului pe ecran
-
-    window.draw(scoreText);
-}
-
 
 
 std::ostream& operator<<(std::ostream& os, const Game& gm)
@@ -169,16 +152,6 @@ void Game::handleCollisions() {
             if (bullets[i].getBounds().intersects(asteroids[j].getBounds())) {
                 bulletsToRemove.push_back(i);
                 asteroidsToRemove.push_back(j);
-                score->increaseScore();
-                if (score->getScore() == 20 && !dynamic_cast<DoubleScore*>(score)) {
-                    delete score;
-                    score = new DoubleScore();
-                }
-
-                if (score->getScore() == 30 && !dynamic_cast<TripleScore*>(score)) {
-                    delete score;
-                    score = new TripleScore();
-                }
             }
         }
     }
@@ -199,7 +172,6 @@ void Game::handleCollisions() {
 void Game::render() {
     window.clear();
 
-    displayScore();
 
         // Draw player
         player.draw(window);
@@ -214,7 +186,6 @@ void Game::render() {
             bullet.draw(window);
         }
 
-
         // Display the contents of the window
         window.display();
 
@@ -224,10 +195,6 @@ void Game::render() {
 void Game::spawnAsteroid() {
     Asteroid asteroid(20.0f, sf::Vector2f(rand() % window.getSize().x, rand() % window.getSize().y));
     asteroids.push_back(asteroid);
-}
-
-Game::~Game() {
-    delete score;
 }
 
 
