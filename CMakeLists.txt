@@ -112,7 +112,9 @@ add_executable(${PROJECT_NAME} main.cpp
         Game/game.cpp
         Player/Player.cpp
         Bullet/Bullet.cpp
-        Asteroids/Asteroid.cpp)
+        Asteroids/Asteroid.cpp
+        score.h
+        score.cpp)
 
 ###############################################################################
 
