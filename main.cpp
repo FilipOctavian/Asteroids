@@ -14,6 +14,16 @@ int main() {
     Player copiedPlayer = originalPlayer;
     std::cout << "Copied Player: " << copiedPlayer << std::endl;
 
+    TimeBasedScore originalTimeScore;
+    originalTimeScore.updateScore();
+
+    std::cout << "Original Time Score: " << originalTimeScore.getScore() << std::endl;
+
+    TimeBasedScore copiedTimeScore = originalTimeScore;
+
+    std::cout << "Copied Time Score: " << copiedTimeScore.getScore() << std::endl;
+
+
 
     return 0;
 }

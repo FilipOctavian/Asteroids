@@ -8,7 +8,7 @@
 #include <iostream>
 #include "game.h"
 
-Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
+Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player(), timeScore(), comboScore(), asteroidScore(), totalScore(&timeScore, &asteroidScore, &comboScore) {
     window.setFramerateLimit(60); // Set a frame rate limit for smooth rendering
 
     inMenu = true;
@@ -34,24 +34,7 @@ Game::Game() : window(sf::VideoMode(800, 600), "Simple Game"), player() {
     exitText.setCharacterSize(20);
     exitText.setFillColor(sf::Color::Black);
     exitText.setPosition(370.0f, 360.0f);
-
-    score = new SimpleScore();
-
 }
-void Game::displayScore() {
-    sf::Font scoreeFont;
-    scoreFont.loadFromFile("Font/ARIBLK.TTF");
-
-    sf::Text scoreeText;
-    scoreText.setFont(scoreFont);
-    scoreText.setString("Score: " + std::to_string(score->getScore()));  // Obține scorul sub formă de șir
-    scoreText.setCharacterSize(24);
-    scoreText.setFillColor(sf::Color::White);
-    scoreText.setPosition(10.0f, 10.0f);  // Ajustează poziția textului pe ecran
-
-    window.draw(scoreText);
-}
-
 
 
 std::ostream& operator<<(std::ostream& os, const Game& gm)
@@ -135,8 +118,12 @@ void Game::handleInput() {
 }
 
 void Game::update() {
+
     // Update player
     player.update();
+
+    timeScore.updateScore();
+    comboScore.updateScore();
 
     // Update asteroids
     for (auto& asteroid : asteroids) {
@@ -146,6 +133,7 @@ void Game::update() {
 
     // Update bullets
     for (auto& bullet : bullets) {
+
         bullet.update();
     }
 
@@ -169,16 +157,8 @@ void Game::handleCollisions() {
             if (bullets[i].getBounds().intersects(asteroids[j].getBounds())) {
                 bulletsToRemove.push_back(i);
                 asteroidsToRemove.push_back(j);
-                score->increaseScore();
-                if (score->getScore() == 20 && !dynamic_cast<DoubleScore*>(score)) {
-                    delete score;
-                    score = new DoubleScore();
-                }
+                asteroidScore.addScore();
 
-                if (score->getScore() == 30 && !dynamic_cast<TripleScore*>(score)) {
-                    delete score;
-                    score = new TripleScore();
-                }
             }
         }
     }
@@ -199,24 +179,42 @@ void Game::handleCollisions() {
 void Game::render() {
     window.clear();
 
-    displayScore();
 
-        // Draw player
-        player.draw(window);
+    // Draw player
+    player.draw(window);
 
-        // Draw asteroids
-        for (auto& asteroid : asteroids) {
-            asteroid.draw(window);
-        }
+    // Draw asteroids
+    for (auto& asteroid : asteroids) {
+        asteroid.draw(window);
+    }
 
-        // Draw bullets
-        for (auto& bullet : bullets) {
-            bullet.draw(window);
-        }
+    // Draw bullets
+    for (auto& bullet : bullets) {
+        bullet.draw(window);
+    }
 
+    sf::Text scoreText;
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(24);
+    scoreText.setFillColor(sf::Color::White);
+    std::string scoreStr = "Time Score: " + std::to_string(timeScore.getScore()) +
+                           "\nAsteroid Score: " + std::to_string(asteroidScore.getScore()) +
+                           "\nCombo Score: " + std::to_string(comboScore.getScore());
+    scoreText.setString(scoreStr);
+    scoreText.setPosition(10, 10);
+    window.draw(scoreText);
 
-        // Display the contents of the window
-        window.display();
+    int totalScoreValue = totalScore.calculateTotalScore();
+    sf::Text totalScoreText;
+    totalScoreText.setFont(font);  // Asigurați-vă că fontul este încărcat
+    totalScoreText.setCharacterSize(24);
+    totalScoreText.setFillColor(sf::Color::White);
+    totalScoreText.setString("Total Score: " + std::to_string(totalScoreValue));
+    totalScoreText.setPosition(10, 120);  // Poziționați textul unde doriți în fereastra
+    window.draw(totalScoreText);
+
+    // Display the contents of the window
+    window.display();
 
 
 }
@@ -225,9 +223,3 @@ void Game::spawnAsteroid() {
     Asteroid asteroid(20.0f, sf::Vector2f(rand() % window.getSize().x, rand() % window.getSize().y));
     asteroids.push_back(asteroid);
 }
-
-Game::~Game() {
-    delete score;
-}
-
-

@@ -1,43 +1,39 @@
 #include "score.h"
 
-void SimpleScore::increaseScore() {
-    // Scorul crește cu un punct la fiecare apel
-    score++;
-}
-
-int SimpleScore::getScore() const {
-    return score;
-}
-
-void DoubleScore::increaseScore() {
-    // Scorul crește cu două puncte la fiecare apel
-    score += 2;
-    handleThresholds();
+TimeBasedScore::TimeBasedScore() : Score(0), timeSinceLastIncrement(0.0f) {
 
 }
 
-int DoubleScore::getScore() const {
-    return score;
-
-}
-void DoubleScore::handleThresholds() {
-    if (score == 20) {
-        score += 2;
+void TimeBasedScore::updateScore() {
+    float currentTime = clock.getElapsedTime().asSeconds();
+    if (currentTime - timeSinceLastIncrement >= 1.0f) { // Verifică dacă a trecut o secundă
+        score += 1;
+        timeSinceLastIncrement = currentTime;
     }
 }
 
-void TripleScore::increaseScore() {
-    score += 3;
-    handleThresholds();
+// Implementare AsteroidHitScore
+void AsteroidHitScore::addScore() {
+    score += 10; // 10 puncte pentru fiecare asteroid distrus
+}
+
+void AsteroidHitScore::updateScore() {
+    // Nu face nimic în update, scorul este actualizat manual
+}
+
+// Implementare ComboScore
+ComboScore::ComboScore() : Score(0), timeSinceLastIncrement(0.0f), comboMultiplier(1) {
 
 }
 
-int TripleScore::getScore() const {
-    return score;
-}
 
-void TripleScore::handleThresholds() {
-    if (score == 30) {
-        score += 3;
+
+void ComboScore::updateScore() {
+    float currentTime = clock.getElapsedTime().asSeconds();
+    if (currentTime - timeSinceLastIncrement >= 10.0f) {
+        comboMultiplier++;
+        score += 5 * comboMultiplier;
+        timeSinceLastIncrement = currentTime;
     }
 }
+

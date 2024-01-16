@@ -13,7 +13,7 @@
 class Game {
 public:
     friend std::ostream& operator<<(std::ostream& os, const Game& gm);
-    virtual ~Game();
+
     Game();
     void run();
 
@@ -28,10 +28,11 @@ private:
     Player player;
     std::vector<Asteroid> asteroids;
     std::vector<Bullet> bullets;
+    TimeBasedScore timeScore;
+    ComboScore comboScore;
+    AsteroidHitScore asteroidScore;
+    TotalScore totalScore;
     int numAsteroids{};
-    Score* score;
-    sf::Font scoreFont;
-    sf::Text scoreText;
     void handleInput();
     void update();
     void render();
@@ -39,5 +40,5 @@ private:
     void handleCollisions();
     void drawMenu();
     void handleMenuInput();
-    void displayScore();
+
 };
