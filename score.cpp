@@ -6,7 +6,7 @@ TimeBasedScore::TimeBasedScore() : Score(0), timeSinceLastIncrement(0.0f) {
 
 void TimeBasedScore::updateScore() {
     float currentTime = clock.getElapsedTime().asSeconds();
-    if (currentTime - timeSinceLastIncrement >= 1.0f) { // Verifică dacă a trecut o secundă
+    if (currentTime - timeSinceLastIncrement >= 1.0f) {
         score += 1;
         timeSinceLastIncrement = currentTime;
     }
@@ -14,14 +14,13 @@ void TimeBasedScore::updateScore() {
 
 // Implementare AsteroidHitScore
 void AsteroidHitScore::addScore() {
-    score += 10; // 10 puncte pentru fiecare asteroid distrus
+    score += 10; 
 }
 
 void AsteroidHitScore::updateScore() {
-    // Nu face nimic în update, scorul este actualizat manual
+
 }
 
-// Implementare ComboScore
 ComboScore::ComboScore() : Score(0), timeSinceLastIncrement(0.0f), comboMultiplier(1) {
 
 }
