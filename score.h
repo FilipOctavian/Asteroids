@@ -6,7 +6,7 @@
 #define OOP_SCORE_H
 
 #endif //OOP_SCORE_H
-
+//
 #pragma once
 
 #include <SFML/System/Clock.hpp>

@@ -1,7 +1,7 @@
 //
 // Created by Octa on 15.11.2023.
 //
-
+//
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 #include <ranges>
