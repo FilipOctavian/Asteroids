@@ -1,5 +1,5 @@
 #include "score.h"
-//
+
 TimeBasedScore::TimeBasedScore() : Score(0), timeSinceLastIncrement(0.0f) {
 
 }
