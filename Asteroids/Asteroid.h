@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <exception>
 #include <string>
-
+//
 class Asteroid {
 public:
     Asteroid(float size, sf::Vector2f position);

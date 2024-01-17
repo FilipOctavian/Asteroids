@@ -1,5 +1,5 @@
 #include "Asteroid.h"
-
+//
 
 Asteroid::Asteroid(float size, sf::Vector2f position) {
     shape.setRadius(size);
