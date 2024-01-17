@@ -14,7 +14,6 @@ void TimeBasedScore::updateScore() {
 
 // Implementare AsteroidHitScore
 void AsteroidHitScore::addScore() {
-
     score += 10; // 10 puncte pentru fiecare asteroid distrus
 }
 
