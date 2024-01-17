@@ -12,6 +12,7 @@
 #include <SFML/System/Clock.hpp>
 
 
+
 class Score {
 protected:
     int score;
@@ -19,6 +20,7 @@ protected:
 public:
     Score(int initialScore = 0) : score(initialScore) {}
     virtual void updateScore() = 0;
+
 
     int getScore() const {
         return score;

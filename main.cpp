@@ -24,7 +24,11 @@ int main() {
 
     std::cout << "Copied Time Score: " << copiedTimeScore.getScore() << std::endl;
 
-
+    try {
+        game.run();
+    } catch (const AsteroidException& e) {
+        std::cerr << "Asteroid Exception: " << e.what() << std::endl;
+    }
 
     return 0;
 }

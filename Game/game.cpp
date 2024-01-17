@@ -130,6 +130,9 @@ void Game::update() {
         asteroid.update();
 
     }
+    if (asteroids.size() > 30) {
+        throw AsteroidException("Too many asteroids on the screen");
+    }
 
     // Update bullets
     for (auto& bullet : bullets) {
